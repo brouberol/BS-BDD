@@ -1,0 +1,188 @@
+[
+    {
+        "pk": 1, 
+        "model": "admission.filiereadmission", 
+        "fields": {
+            "nom": "PC-Lyon"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "admission.filiereadmission", 
+        "fields": {
+            "nom": "PC-Rennes"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "admission.filiereadmission", 
+        "fields": {
+            "nom": "PC-Toulouse"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "admission.filiereadmission", 
+        "fields": {
+            "nom": "PC-Strasbourg"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "admission.filiereadmission", 
+        "fields": {
+            "nom": "PC-Rouen"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "admission.filiereadmission", 
+        "fields": {
+            "nom": "DEUG"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "admission.filiereadmission", 
+        "fields": {
+            "nom": "BTS"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "admission.filiereadmission", 
+        "fields": {
+            "nom": "L3"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "admission.filiereadmission", 
+        "fields": {
+            "nom": "DUT"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "admission.filiereadmission", 
+        "fields": {
+            "nom": "MSp\u00e9"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "ASINSA"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "EURINSA"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "AMERINSA"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "SCAN"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "FAS"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "Classique"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "Sport-\u00e9tudes"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "Technique-\u00e9tudes"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "Danse-\u00e9tudes"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "Musique-\u00e9tudes"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "Biologie"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "Chimie"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "Math\u00e9matiques"
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "Informatique"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "admission.domaineadmission", 
+        "fields": {
+            "nom": "Bioinformatique"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "admission.admission", 
+        "fields": {
+            "filiere_org": 1, 
+            "taille_promo_pre_BS": 680, 
+            "domaine_org": 4, 
+            "annee_admission": 3, 
+            "rang_pre_BS": 508
+        }
+    }
+]
