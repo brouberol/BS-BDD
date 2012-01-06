@@ -7,14 +7,9 @@ Administrative information about former students
 from django.db import models
 
 class EtatCivil(models.Model):
-    """
-    Model defining the adminstrative information about a former student
-    """
+    """Model defining the adminstrative information about a former student"""
 
-    SEXE = (
-        ('H', 'H'),
-        ('F', 'F'),
-        )
+    SEXE = (('H', 'H'),('F', 'F'),)
        
     nom_insa       = models.CharField(max_length=30, verbose_name=u"Nom à l'INSA")
     nom_actuel     = models.CharField(max_length=30, verbose_name=u"Nom actuel", blank=True)
@@ -33,8 +28,8 @@ class EtatCivil(models.Model):
     email_2        = models.EmailField(verbose_name=u"Email 2", blank=True)
 
     def __unicode__(self):
-        """
-        Determines how an 'etat civil' will be displayed (ONLY USED THAT WAY IN THE ADMIN INTERFACE)
-        """
+        """Determines how an 'etat civil' instance will be displayed """
         return u'{0} {1} - {2} - {3}'.format(self.prenom, self.nom_insa, self.sexe, self.num_etudiant)
     
+    class Meta:
+        verbose_name_plural = u"Etats civils"

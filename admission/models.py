@@ -16,6 +16,10 @@ class FiliereAdmission(models.Model):
         """Determines how a FiliereAdmission instance will be displayed"""
         return u'%s' % self.nom
 
+    class Meta:
+        verbose_name        = u"Filière d'origine"
+        verbose_name_plural = u"Filières d'origine"
+
 class DomaineAdmission(models.Model):
     """
     This model lists all possible domains that a student
@@ -27,6 +31,10 @@ class DomaineAdmission(models.Model):
     def __unicode__(self):
         """Determines how a DomaineAdmission instance will be displayed"""
         return u'%s' % self.nom
+
+    class Meta:
+        verbose_name        = u"Domaine d'origine"
+        verbose_name_plural = u"Domaines d'origine"
 
 class Admission(models.Model):
     """
