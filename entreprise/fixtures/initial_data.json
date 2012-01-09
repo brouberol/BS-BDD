@@ -1,0 +1,245 @@
+[
+    {
+        "pk": 1, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Anatomie"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Bio-\u00e9thique"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Bio-informatique"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Bio-mat\u00e9riaux"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Bio-physique"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Bio-technologies"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Biochimie"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Biochimie"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Biologie cellulaire"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Biologie de l'\u00e9volution"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Biologie humaine"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Biologie marine"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Biologie mol\u00e9culaire"
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Botanique"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Canc\u00e9rologie"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "\u00c9cologie"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "\u00c9pid\u00e9miologie"
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "\u00c9quipement de laboratoire"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Ethnologie"
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "Exobiologie"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "entreprise.entreprisedomainespecifique", 
+        "fields": {
+            "nom": "G\u00e9n\u00e9tique"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "entreprise.entreprisedomainegeneral", 
+        "fields": {
+            "nom": "Agro-alimentaire"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "entreprise.entreprisedomainegeneral", 
+        "fields": {
+            "nom": "Assurance"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "entreprise.entreprisedomainegeneral", 
+        "fields": {
+            "nom": "Chimie"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "entreprise.entreprisedomainegeneral", 
+        "fields": {
+            "nom": "Chimie-physique"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "entreprise.entreprisedomainegeneral", 
+        "fields": {
+            "nom": "Commerce"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "entreprise.entreprisedomainegeneral", 
+        "fields": {
+            "nom": "Enseignement et recherche"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "entreprise.entreprisedomainegeneral", 
+        "fields": {
+            "nom": "Environnement"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "entreprise.entreprisedomainegeneral", 
+        "fields": {
+            "nom": "Finance"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "entreprise.entreprisedomainegeneral", 
+        "fields": {
+            "nom": "Informatique"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "entreprise.entreprisedomainegeneral", 
+        "fields": {
+            "nom": "Math\u00e9matiques"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "entreprise.entreprisedomainegeneral", 
+        "fields": {
+            "nom": "Sant\u00e9"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "entreprise.entreprisedomainegeneral", 
+        "fields": {
+            "nom": "Statistiques"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "entreprise.entreprise", 
+        "fields": {
+            "nom": "BiochimieEntrepriseCorporate", 
+            "taille": "", 
+            "domaine_specifique": 2, 
+            "adresse": "", 
+            "zip_adresse": null, 
+            "domaine_general": 4
+        }
+    }
+]
