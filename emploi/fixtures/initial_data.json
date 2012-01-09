@@ -1,0 +1,18 @@
+[
+    {
+        "pk": 1, 
+        "model": "emploi.emploi", 
+        "fields": {
+            "titre": "Grouillot cr\u00e9ateur d'interface web", 
+            "entreprise": 2
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "emploi.emploi", 
+        "fields": {
+            "titre": "Ing\u00e9nieur en machine \u00e0 caf\u00e9", 
+            "entreprise": 1
+        }
+    }
+]
