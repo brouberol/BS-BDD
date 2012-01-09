@@ -8,10 +8,11 @@ from django.contrib import admin
 class EntrepriseAdmin(admin.ModelAdmin):
     """Admin model of the FiliereAdmission model"""
 
-    list_display = ('nom',)#, 'domaine_general__nom', 'domaine_specifique__nom')
-    search_fields = ('nom',)
-    #list_filter = ['nationalite', 'sexe']
-
+    list_display = ('nom',) 
+    search_fields = ('nom',
+                     'domaine_general__nom', 
+                     'domaine_specifique__nom')
+    list_filter = ['domaine_general__nom',]
 
 class EntrepriseDomaineSpecifiqueAdmin(admin.ModelAdmin):
     """Admin model of the EntrepriseDomaineSpecifique model"""
