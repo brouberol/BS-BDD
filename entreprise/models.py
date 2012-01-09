@@ -7,7 +7,7 @@ from django.db import models
 
 class EntrepriseDomaineSpecifique(models.Model):
     """Specific company domain description"""
-    nom = models.CharField(max_length=50)
+    nom = models.CharField(max_length=50, unique=True)
 
     def __unicode__(self):
         """ EntrepriseDomaineSpecifique representation"""
@@ -20,7 +20,7 @@ class EntrepriseDomaineSpecifique(models.Model):
 
 class EntrepriseDomaineGeneral(models.Model):
     """General company domain description"""
-    nom = models.CharField(max_length=50)
+    nom = models.CharField(max_length=50, unique=True)
     
     def __unicode__(self):
          """ EntrepriseDomaineGeneral representation"""
@@ -34,7 +34,7 @@ class EntrepriseDomaineGeneral(models.Model):
 class Entreprise(models.Model):
     """Company description"""
     
-    TAILLE = (
+    TAILLE = ( # SPECIFIC TABLE ?
         ('<20', '<20'),
         ('20-250', '20-250'),
         ('250-500', '250-500'),

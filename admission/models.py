@@ -10,7 +10,7 @@ class FiliereAdmission(models.Model):
     This model lists all possible 'filières' that a student
     could have studied in before BS
     """
-    nom = models.CharField(max_length=50)
+    nom = models.CharField(max_length=50, unique=True)
 
     def __unicode__(self):
         """Determines how a FiliereAdmission instance will be displayed"""
@@ -26,7 +26,7 @@ class DomaineAdmission(models.Model):
     could have studied in before BS, being more precise than
     the FiliereAdmission model
     """
-    nom = models.CharField(max_length=50)
+    nom = models.CharField(max_length=50, unique=True)
 
     def __unicode__(self):
         """Determines how a DomaineAdmission instance will be displayed"""
