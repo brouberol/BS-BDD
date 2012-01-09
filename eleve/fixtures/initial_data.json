@@ -5,7 +5,11 @@
         "fields": {
             "admission": 1, 
             "user": 1, 
-            "etat_civil": 2
+            "etat_civil": 2, 
+            "annee_bs": [
+                1, 
+                3
+            ]
         }
     }
 ]
