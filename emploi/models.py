@@ -11,5 +11,4 @@ class Emploi(models.Model):
     """Job title description"""
     
     titre      = models.CharField(max_length=75, verbose_name=u'Description du poste')
-    entreprise = models.ManyToManyField(Entreprise) 
-    
+    entreprise = models.ManyToManyField(Entreprise)
