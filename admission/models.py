@@ -48,8 +48,8 @@ class Admission(models.Model):
         (5, '5'),
         )
 
-    filiere_org         = models.OneToOneField(FiliereAdmission, on_delete=models.CASCADE, verbose_name=u"Filière d'origine")
-    domaine_org         = models.OneToOneField(DomaineAdmission, on_delete=models.CASCADE, verbose_name=u"Domaine de la filière d'origine")
+    filiere_org         = models.ForeignKey(FiliereAdmission, on_delete=models.CASCADE, verbose_name=u"Filière d'origine")
+    domaine_org         = models.ForeignKey(DomaineAdmission, on_delete=models.CASCADE, verbose_name=u"Domaine de la filière d'origine")
     annee_admission     = models.PositiveSmallIntegerField(choices=ANNEE_ADMISSION, verbose_name=u"Année d'admission")
     rang_pre_BS         = models.PositiveIntegerField(verbose_name=u"Classement avant admission en BS", null=True, blank=True)
     taille_promo_pre_BS = models.PositiveIntegerField(verbose_name=u"Taille de la promo avant admission en BS", null=True, blank=True)

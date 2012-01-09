@@ -30,7 +30,7 @@ class Eleve(models.Model):
     #last_login: auto
     #date_joined: auto
     etat_civil = models.OneToOneField(EtatCivil, on_delete=models.CASCADE)
-    admission  = models.OneToOneField(Admission, on_delete=models.CASCADE)
+    admission  = models.ForeignKey(Admission, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return u"%s %s - %s - %d" %(self.etat_civil.prenom, self.etat_civil.nom_insa, self.user.username, self.etat_civil.num_etudiant) 

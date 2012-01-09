@@ -46,8 +46,8 @@ class Entreprise(models.Model):
     adresse            = models.TextField(max_length=150, blank=True)
     zip_adresse        = models.PositiveIntegerField(verbose_name=u"Code postal", null=True, blank=True)
     taille             = models.CharField(max_length=20, choices=TAILLE, blank=True)
-    domaine_general    = models.ForeignKey(EntrepriseDomaineGeneral, null=True)
-    domaine_specifique = models.ForeignKey(EntrepriseDomaineSpecifique, null=True)
+    domaine_general    = models.ManyToManyField(EntrepriseDomaineGeneral, null=True)
+    domaine_specifique = models.ManyToManyField(EntrepriseDomaineSpecifique, null=True)
     
     def __unicode__(self):
         """Entreprise instance representation"""

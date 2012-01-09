@@ -101,7 +101,7 @@
         "pk": 16, 
         "model": "entreprise.entreprisedomainespecifique", 
         "fields": {
-            "nom": "Canc\u00e9rologie"
+            "nom": "Cancerologie"
         }
     }, 
     {
@@ -115,7 +115,7 @@
         "pk": 19, 
         "model": "entreprise.entreprisedomainespecifique", 
         "fields": {
-            "nom": "\u00c9pid\u00e9miologie"
+            "nom": "Epid\u00e9miologie"
         }
     }, 
     {
@@ -182,13 +182,6 @@
         }
     }, 
     {
-        "pk": 12, 
-        "model": "entreprise.entreprisedomainegeneral", 
-        "fields": {
-            "nom": "Enseignement et recherche"
-        }
-    }, 
-    {
         "pk": 2, 
         "model": "entreprise.entreprisedomainegeneral", 
         "fields": {
@@ -228,18 +221,6 @@
         "model": "entreprise.entreprisedomainegeneral", 
         "fields": {
             "nom": "Statistiques"
-        }
-    }, 
-    {
-        "pk": 1, 
-        "model": "entreprise.entreprise", 
-        "fields": {
-            "nom": "BiochimieEntrepriseCorporate", 
-            "taille": "", 
-            "domaine_specifique": 2, 
-            "adresse": "", 
-            "zip_adresse": null, 
-            "domaine_general": 4
         }
     }
 ]
