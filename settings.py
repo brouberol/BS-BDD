@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'emploi',
     'entreprise',
     'etat_civil',
+    'univ',
 )
 
 # A sample logging configuration. The only tangible logging
