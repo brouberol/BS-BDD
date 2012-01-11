@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 
 from etat_civil.models import EtatCivil
 from admission.models import Admission
-from annee.models import AnneeBS
 
 
 class Eleve(models.Model):
@@ -32,8 +31,7 @@ class Eleve(models.Model):
     #date_joined: auto
     etat_civil = models.OneToOneField(EtatCivil, on_delete=models.CASCADE)
     admission  = models.ForeignKey(Admission, on_delete=models.CASCADE)
-    annee_bs   = models.ManyToManyField(AnneeBS)
-    # TODO : manytomany emploi eleve
+
 
     def __unicode__(self):
         return u"%s %s - %s - %d" %(self.etat_civil.prenom, self.etat_civil.nom_insa, self.user.username, self.etat_civil.num_etudiant) 
