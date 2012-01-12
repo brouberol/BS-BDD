@@ -85,15 +85,19 @@ class EmploiEleve(models.Model):
     """Association between a former student and a job position"""
     
     eleve           = models.ForeignKey(Eleve)
-    emploi          = models.ForeignKey(Emploi, null=True)
+    emploi          = models.ForeignKey(Emploi, blank=True, null=True)
     situation       = models.ForeignKey(Situation)
-    position        = models.ForeignKey(Position, null=True)
-    annee           = models.PositiveIntegerField(verbose_name=u"Année d'embauche", null=True)
-    salaire         = models.PositiveIntegerField(null=True)
-    duree_recherche = models.PositiveIntegerField(verbose_name=u"Durée de recherche d'emploi", help_text=u"En mois. Mettez un chiffre rond", null=True)
+    position        = models.ForeignKey(Position, blank=True, null=True)
+    cadre           = models.BooleanField(verbose_name="Emploi cadre?", blank=True)
+    annee           = models.PositiveIntegerField(verbose_name=u"Année d'embauche", blank=True)
+    salaire         = models.DecimalField(max_digits=4, decimal_places=1, blank=True,  help_text="en k€")
+    duree_recherche = models.PositiveIntegerField(verbose_name=u"Durée de recherche d'emploi", help_text=u"En mois. Mettez un chiffre rond", blank=True)
   
     def __unicode__(self):
-        return '%s %s - %s' %(self.eleve.etat_civil.prenom, self.eleve.etat_civil.nom_insa, self.emploi)
+        if self.situation in ['CDI', 'CDD']:
+            return '%s %s - %s' %(self.eleve.etat_civil.prenom, self.eleve.etat_civil.nom_insa, self.emploi)
+        else:
+            return '%s %s - %s'%(self.eleve.etat_civil.prenom, self.eleve.etat_civil.nom_insa, self.situation)
 
     class Meta:
         verbose_name =u"Élève employé"

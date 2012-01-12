@@ -21,10 +21,6 @@ class PromoBS(models.Model):
     CATEGORIE =  (('Normale', 'Normale'), ('Cesure', 'Césure'), ('Sabbatique', 'Sabbatique'), ('Echange', 'Échange académique'))
     
     # WARNING : un echange ne peut pas etre associe a une annee de type 3/4/5/C/S
-
-    # TODO (?) 2 attributs au lieu d'un seul (CATEGORIE):
-    #  - annee : 3,4,5
-    #  - type  : Normal, Echange, Sabbatique, Cesure
     
     niveau       = models.CharField(max_length=20, choices=ANNEE, verbose_name=u"Niveau de formation")
     filiere      = models.CharField(max_length=5, choices=FILIERE, verbose_name=u'Filière', help_text=u"Bioch : filière avant 199X") # TODO : update help_text

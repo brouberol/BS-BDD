@@ -25,6 +25,9 @@ class StageEleve(models.Model):
     promo_eleve = models.ForeignKey(PromoBSEleve)
     stage       = models.ForeignKey(Stage)
 
+    def __unicode__(self):
+        return '%s - %s' %(self.promo_eleve, self.stage)
+
     class Meta:
         verbose_name = u"Stage effectué par un élève"
         verbose_name_plural = u"Stages effectués par des élèves"
