@@ -39,4 +39,24 @@ class Eleve(models.Model):
     class Meta:
         verbose_name = u"Élève"
 
+class EleveDiplome(models.Model):
+    """
+    Model representing students 'linked' to graduation :
+    * students who graduated
+    * students whose diploma was no delivered
+    """
+    
+    eleve   = models.ForeignKey(Eleve, unique=True)
+    diplome = models.BooleanField(verbose_name=u"Diplôme délivré?")
+    annee   = models.PositiveIntegerField(blank=True, null=True)
+
+    def __unicode__(self):
+        if self.diplome == True:
+            return '%s - Diplome remis en %d' %(self.eleve, self.annee)
+        else:
+            return '%s - Diplome refuse' %(self.eleve)
+
+    class Meta:
+        verbose_name = u"Élève diplômé"
+        verbose_name_plural = u"Élèves diplômés"
 
