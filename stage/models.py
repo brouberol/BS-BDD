@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Models describing internships and their relation with students and scholar years
 """
@@ -13,7 +14,7 @@ class Stage(models.Model):
     employeur = models.ForeignKey(Employeur)
     sujet     = models.TextField(max_length=2000)
     duree     = models.PositiveSmallIntegerField(help_text=u"En mois. Mettez un chiffre rond", verbose_name=u"Durée du stage")
-    salaire   = models.DecimalField(decimal_places=2)
+    salaire   = models.DecimalField(decimal_places=2, max_digits=5)
 
 class StageEleve(models.Model):
     """Association between an internship and the scholar year of a student"""
