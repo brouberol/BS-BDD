@@ -9,6 +9,9 @@ from django.db import models
 class Pays(models.Model):
     """List of all countries"""
     nom = models.CharField(max_length=40)
+
+    def __unicode__(self):
+        return '%s' % self.nom
     
     class Meta:
         verbose_name_plural = u'Pays'

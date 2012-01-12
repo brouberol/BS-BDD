@@ -1,0 +1,99 @@
+[
+    {
+        "pk": 1, 
+        "model": "annee.promobs", 
+        "fields": {
+            "num_promo": 2012, 
+            "taille_promo": 22, 
+            "categorie": "Normale", 
+            "niveau": "4", 
+            "filiere": "BIM", 
+            "annee": 2010
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "annee.promobs", 
+        "fields": {
+            "num_promo": 2012, 
+            "taille_promo": 20, 
+            "categorie": "Normale", 
+            "niveau": "3", 
+            "filiere": "BIM", 
+            "annee": 2009
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "annee.promobs", 
+        "fields": {
+            "num_promo": 2012, 
+            "taille_promo": 22, 
+            "categorie": "Normale", 
+            "niveau": "5", 
+            "filiere": "BIM", 
+            "annee": 2011
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "annee.promobs", 
+        "fields": {
+            "num_promo": 2012, 
+            "taille_promo": 24, 
+            "categorie": "Normale", 
+            "niveau": "3", 
+            "filiere": "BB", 
+            "annee": 2009
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "annee.promobseleve", 
+        "fields": {
+            "promo_bs": 1, 
+            "eleve": 1
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "annee.promobseleve", 
+        "fields": {
+            "promo_bs": 2, 
+            "eleve": 1
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "annee.promobseleve", 
+        "fields": {
+            "promo_bs": 3, 
+            "eleve": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "annee.echangeeleve", 
+        "fields": {
+            "promo_eleve": 5, 
+            "duree": 4, 
+            "universite": 1
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "annee.resultateleve", 
+        "fields": {
+            "promo_eleve": 6, 
+            "rang": 12
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "annee.resultateleve", 
+        "fields": {
+            "promo_eleve": 5, 
+            "rang": 10
+        }
+    }
+]

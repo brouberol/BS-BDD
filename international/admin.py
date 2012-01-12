@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 """
-Admin interface tweaking for Univ model
+Admin registering for Univ model
 """
 
-from univ.models import Universite, Pays
+from international.models import Universite, Pays
 from django.contrib import admin
 
 admin.site.register(Universite)

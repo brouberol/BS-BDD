@@ -1,5 +1,5 @@
 """
-Admin interface tweaking for the preBS models
+Admin registering for the preBS models
 """
 
 from admission.models import Admission, FiliereAdmission, DomaineAdmission
@@ -15,7 +15,8 @@ class DomaineAdmissionAdmin(admin.ModelAdmin):
 
 class AdmissionAdmin(admin.ModelAdmin):
     """Admin model of the Admission model"""
-    pass
+    list_display = ('annee_admission', 'domaine_org', 'filiere_org',)
+    list_filter = ['filiere_org__nom','annee_admission']
 
 admin.site.register(FiliereAdmission, FiliereAdmissionAdmin)
 admin.site.register(DomaineAdmission, DomaineAdmissionAdmin)

@@ -5,6 +5,8 @@ Model describing job titles chosen by former student, and companies
 
 from django.db import models
 
+from eleve.models import Eleve
+
 class EmployeurDomaineSpecifique(models.Model):
     """Specific company domain description"""
     nom = models.CharField(max_length=50, unique=True)
@@ -43,7 +45,7 @@ class Employeur(models.Model):
         )
 
     nom                = models.CharField(max_length=50)
-    adresse            = models.TextField(max_length=150, blank=True)
+    adresse            = models.CharField(max_length=150, blank=True)
     zip_adresse        = models.PositiveIntegerField(verbose_name=u"Code postal", null=True, blank=True)
     taille             = models.CharField(max_length=20, choices=TAILLE, blank=True)
     domaine_general    = models.ManyToManyField(EmployeurDomaineGeneral, null=True)
@@ -55,12 +57,47 @@ class Employeur(models.Model):
 
 class Position(models.Model):
     """Type of jobs, defined by the Levy table """
-    nom = models.CharField(max_length=50)
-
+    nom = models.CharField(max_length=50, unique=True)
+    
+    def __unicode__(self):
+        return "%s" % self.nom
+    
+    class Meta:
+        ordering= ['nom']
+        
 class Emploi(models.Model):
     """Job title description"""
-
-    entreprise  = models.ManyToManyField(Employeur)
+    
+    employeur  = models.ForeignKey(Employeur)
     description = models.CharField(max_length=75, verbose_name=u'Description du poste')
-    position    = models.ForeignKey(Position)
-   
+    
+    def __unicode__(self):
+        return '%s - %s' %(self.employeur.nom, self.description)
+
+class Situation(models.Model):
+    """Model describing the state of employement of a person"""
+    nom = models.CharField(max_length=30)
+
+    def __unicode__(self):
+        return '%s' % self.nom
+    
+class EmploiEleve(models.Model):
+    """Association between a former student and a job position"""
+    
+    eleve           = models.ForeignKey(Eleve)
+    emploi          = models.ForeignKey(Emploi, null=True)
+    situation       = models.ForeignKey(Situation)
+    position        = models.ForeignKey(Position, null=True)
+    annee           = models.PositiveIntegerField(verbose_name=u"Année d'embauche", null=True)
+    salaire         = models.PositiveIntegerField(null=True)
+    duree_recherche = models.PositiveIntegerField(verbose_name=u"Durée de recherche d'emploi", help_text=u"En mois. Mettez un chiffre rond", null=True)
+  
+    def __unicode__(self):
+        return '%s %s - %s' %(self.eleve.etat_civil.prenom, self.eleve.etat_civil.nom_insa, self.emploi)
+
+    class Meta:
+        verbose_name =u"Élève employé"
+        verbose_name_plural = u"Élèves employés"
+        unique_together = [('eleve', 'emploi', 'position', 'annee')]
+     
+     

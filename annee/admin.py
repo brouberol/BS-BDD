@@ -1,17 +1,17 @@
 """
-Admin interface tweaking for the annee models
+Admin registering the annee models
 """
 
-from annee.models import AnneeBS, Echange, EchangeEleve
+from annee.models import PromoBS, PromoBSEleve, EchangeEleve, ResultatEleve
 from django.contrib import admin
 
-class AnneeBSAdmin(admin.ModelAdmin):
+class PromoBSAdmin(admin.ModelAdmin):
     """Admin registering of the AnneeBS model"""
+    list_display = ('niveau', 'filiere', 'categorie', 'num_promo')
+    list_filter = ['filiere','categorie', 'niveau']
 
-    list_display = ('filiere','categorie', 'num_promo')
-    list_filter = ['filiere','categorie']
-
-admin.site.register(AnneeBS, AnneeBSAdmin)
-admin.site.register(Echange)
+admin.site.register(PromoBS, PromoBSAdmin)
+admin.site.register(PromoBSEleve)
 admin.site.register(EchangeEleve)
+admin.site.register(ResultatEleve)
 

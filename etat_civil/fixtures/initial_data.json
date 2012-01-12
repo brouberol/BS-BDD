@@ -1,0 +1,21 @@
+[
+    {
+        "pk": 1, 
+        "model": "etat_civil.etatcivil", 
+        "fields": {
+            "adresse_2": "", 
+            "nationalite": 1, 
+            "sexe": "H", 
+            "nom_insa": "Michel", 
+            "zip_adresse_2": null, 
+            "adresse_1": "", 
+            "email_2": "test@test.fr", 
+            "email_1": "a@pe.ro", 
+            "nom_actuel": "", 
+            "zip_adresse_1": null, 
+            "num_etudiant": 271789, 
+            "date_naissance": "2012-01-12", 
+            "prenom": "Jose"
+        }
+    }
+]

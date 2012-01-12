@@ -1,0 +1,510 @@
+[
+    {
+        "pk": 1, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Anatomie"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Bio-\u00e9thique"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Bio-informatique"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Bio-mat\u00e9riaux"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Bio-physique"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Bio-technologies"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Biochimie"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Biologie de l'\u00e9volution"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Biologie humaine"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Biologie marine"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Biologie mol\u00e9culaire"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Botanique"
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Canc\u00e9rologie"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "\u00c9cologie"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Epid\u00e9miologie"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "\u00c9quipement de laboratoire"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Ethnologie"
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "Exobiologie"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "emploi.employeurdomainespecifique", 
+        "fields": {
+            "nom": "G\u00e9n\u00e9tique"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "emploi.employeurdomainegeneral", 
+        "fields": {
+            "nom": "Agro-alimentaire"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "emploi.employeurdomainegeneral", 
+        "fields": {
+            "nom": "Assurance"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "emploi.employeurdomainegeneral", 
+        "fields": {
+            "nom": "Chimie"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "emploi.employeurdomainegeneral", 
+        "fields": {
+            "nom": "Chimie-physique"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "emploi.employeurdomainegeneral", 
+        "fields": {
+            "nom": "Commerce"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "emploi.employeurdomainegeneral", 
+        "fields": {
+            "nom": "Enseignement & recherche"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "emploi.employeurdomainegeneral", 
+        "fields": {
+            "nom": "Evironnement"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "emploi.employeurdomainegeneral", 
+        "fields": {
+            "nom": "Finance"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "emploi.employeurdomainegeneral", 
+        "fields": {
+            "nom": "Informatique"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "emploi.employeurdomainegeneral", 
+        "fields": {
+            "nom": "Math\u00e9matiques"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "emploi.employeurdomainegeneral", 
+        "fields": {
+            "nom": "Sant\u00e9"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "emploi.employeurdomainegeneral", 
+        "fields": {
+            "nom": "Statistiques"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "emploi.employeur", 
+        "fields": {
+            "nom": "INSA de Lyon", 
+            "taille": "500-2000", 
+            "domaine_specifique": [
+                16
+            ], 
+            "adresse": "20 avenue Albert Einstein", 
+            "zip_adresse": 69100, 
+            "domaine_general": [
+                12
+            ]
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "emploi.employeur", 
+        "fields": {
+            "nom": "CGMC", 
+            "taille": ">2000", 
+            "domaine_specifique": [
+                3
+            ], 
+            "adresse": "Lyon1", 
+            "zip_adresse": 69100, 
+            "domaine_general": [
+                12
+            ]
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Architecte des SI"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Chef de produit (ou assistant)"
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Chercheur"
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Consultant"
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Cr\u00e9ateurs d'entreprise"
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Enseignement du primaire ou secondaire"
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Fonctions de management"
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. achats"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. Am\u00e9nagement (urbain et territoire)"
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. conseil, expert"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. d'affaires"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. de bureau d'\u00e9tudes"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. de chantier"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. de recherche"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. environnement"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. essais, mesures, tests"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. \u00e9tudes et d\u00e9veloppement"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. industrialisation et m\u00e9thodes"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. logiciel"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. logistique"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. maintenance"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. projet"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. qualit\u00e9"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. r\u00e9seau"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. syst\u00e8me"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. syst\u00e8mes d'information"
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Ing. technico-commercial"
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "PostDoc"
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "emploi.position", 
+        "fields": {
+            "nom": "Th\u00e9sard"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "emploi.emploi", 
+        "fields": {
+            "employeur": 1, 
+            "description": "Grouillot Concepteur de BDD"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "emploi.situation", 
+        "fields": {
+            "nom": "CDD"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "emploi.situation", 
+        "fields": {
+            "nom": "CDI"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "emploi.situation", 
+        "fields": {
+            "nom": "Sans activit\u00e9 salari\u00e9e"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "emploi.situation", 
+        "fields": {
+            "nom": "Retrait\u00e9"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "emploi.situation", 
+        "fields": {
+            "nom": "Recherche d'emploi"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "emploi.emploieleve", 
+        "fields": {
+            "emploi": 1, 
+            "duree_recherche": 0, 
+            "salaire": 0, 
+            "eleve": 1, 
+            "position": 18, 
+            "situation": 1, 
+            "annee": 2012
+        }
+    }
+]
