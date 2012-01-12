@@ -18,7 +18,7 @@ class EtatCivil(models.Model):
     prenom         = models.CharField(max_length=30, verbose_name=u"Prénom")
     num_etudiant   = models.PositiveIntegerField(verbose_name=u"Numéro d'étudiant", unique=True)
     sexe           = models.CharField(max_length=1, choices=SEXE, verbose_name=u"Sexe")
-    date_naissance = models.DateField(verbose_name=u"Date de naissance", help_text=u"jj/mm/aaaa") # FIXME : nationalite devrait être un foreign key vers id pays !
+    date_naissance = models.DateField(verbose_name=u"Date de naissance", help_text=u"jj/mm/aaaa") 
     nationalite    = models.ForeignKey(Pays, verbose_name=u"Nationalité")
     adresse_1      = models.TextField(max_length=200, verbose_name=u"Adresse personnelle", blank=True)
     zip_adresse_1  = models.PositiveIntegerField(verbose_name=u"Code postal de l'adresse personnelle", null=True, blank=True)

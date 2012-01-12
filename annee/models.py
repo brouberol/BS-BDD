@@ -65,7 +65,7 @@ class EchangeEleve(models.Model):
     
     universite  = models.ForeignKey(Universite, verbose_name=u"Université d'accueil")
     promo_eleve = models.ForeignKey(PromoBSEleve, verbose_name=u"Année d'échange", unique=True) 
-    duree       = models.PositiveSmallIntegerField(verbose_name=u"Durée de l'échange", help_text=u"En mois. Donnez un nombre rond.")
+    duree       = models.PositiveSmallIntegerField(verbose_name=u"Durée de l'échange", help_text=u"En mois. Donnez un nombre rond.", blank=True, null=True)
 
     def __unicode__(self):
         return '%s - %s - %s - %d mois' %(self.promo_eleve, self.universite.pays, self.universite.nom, self.duree)
@@ -80,7 +80,7 @@ class ResultatEleve(models.Model):
 
     # WARNING : no rank in 5th year
 
-    promo_eleve = models.ForeignKey(PromoBSEleve, verbose_name=u"Élève & promotion")
+    promo_eleve = models.ForeignKey(PromoBSEleve, verbose_name=u"Élève & promotion", unique=True)
     rang        = models.PositiveIntegerField(verbose_name=u"Classement")
 
     def __unicode__(self):

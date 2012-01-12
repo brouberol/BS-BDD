@@ -44,12 +44,12 @@ class Employeur(models.Model):
         ('>2000', '>2000'),
         )
 
-    nom                = models.CharField(max_length=50)
+    nom                = models.CharField(max_length=50, unique=True)
     adresse            = models.CharField(max_length=150, blank=True)
     zip_adresse        = models.PositiveIntegerField(verbose_name=u"Code postal", null=True, blank=True)
     taille             = models.CharField(max_length=20, choices=TAILLE, blank=True)
-    domaine_general    = models.ManyToManyField(EmployeurDomaineGeneral, null=True)
-    domaine_specifique = models.ManyToManyField(EmployeurDomaineSpecifique, null=True)
+    domaine_general    = models.ManyToManyField(EmployeurDomaineGeneral, null=True, blank=True)
+    domaine_specifique = models.ManyToManyField(EmployeurDomaineSpecifique, null=True, blank=True)
     
     def __unicode__(self):
         """Employeur instance representation"""
@@ -74,24 +74,48 @@ class Emploi(models.Model):
     def __unicode__(self):
         return '%s - %s' %(self.employeur.nom, self.description)
 
+    class Meta:
+        unique_together = ['employeur', 'description']
+
 class Situation(models.Model):
     """Model describing the state of employement of a person"""
-    nom = models.CharField(max_length=30)
+    nom = models.CharField(max_length=30, unique=True)
 
     def __unicode__(self):
         return '%s' % self.nom
     
+class DifficulteRecherche(models.Model):
+    """Model describing difficulties to find a job"""
+    nom = models.CharField(max_length=100, unique=True)
+    
+    def __unicode__(self):
+        return '%s' % self.nom
+
+    class Meta:
+        verbose_name =u"Difficulté de recherche d'emploi"
+        verbose_name_plural = "Difficultés de recherche d'emploi"
+
 class EmploiEleve(models.Model):
     """Association between a former student and a job position"""
+
+    ADEQUATION = (
+        ('Parfaite',    'Parfaite'),
+        ('Bonne',       'Bonne'   ),
+        ('Moyenne',     'Moyenne' ),
+        ('Faible',      'Faible'  ),
+        ('Tres faible', 'Très faible'),
+        )
     
     eleve           = models.ForeignKey(Eleve)
     emploi          = models.ForeignKey(Emploi, blank=True, null=True)
     situation       = models.ForeignKey(Situation)
     position        = models.ForeignKey(Position, blank=True, null=True)
     cadre           = models.BooleanField(verbose_name="Emploi cadre?", blank=True)
-    annee           = models.PositiveIntegerField(verbose_name=u"Année d'embauche", blank=True)
-    salaire         = models.DecimalField(max_digits=4, decimal_places=1, blank=True,  help_text="en k€")
-    duree_recherche = models.PositiveIntegerField(verbose_name=u"Durée de recherche d'emploi", help_text=u"En mois. Mettez un chiffre rond", blank=True)
+    annee           = models.PositiveIntegerField(verbose_name=u"Année d'embauche", blank=True, null=True)
+    salaire         = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True,  help_text="en k€")
+    duree_recherche = models.PositiveIntegerField(verbose_name=u"Durée de recherche d'emploi", help_text=u"En mois. Mettez un chiffre rond", blank=True, null=True)
+    adequation      = models.CharField(max_length=30, choices=ADEQUATION, blank=True, verbose_name=u"Adéquation formation/emploi")
+    difficulte_rech = models.ForeignKey(DifficulteRecherche, blank=True, null=True, verbose_name=u"Difficultés dans la recherche d'emploi")
   
     def __unicode__(self):
         if self.situation in ['CDI', 'CDD']:

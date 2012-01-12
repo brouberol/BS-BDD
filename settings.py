@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'emploi',
     'etat_civil',
     'international',
+    'post_bs',
     'stage',
 )
 

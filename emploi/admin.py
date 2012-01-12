@@ -2,7 +2,7 @@
 Admin registering for the emploi models
 """
 
-from emploi.models import Emploi, Employeur, EmployeurDomaineSpecifique, EmployeurDomaineGeneral, Position, EmploiEleve, Situation
+from emploi.models import Emploi, Employeur, EmployeurDomaineSpecifique, EmployeurDomaineGeneral, Position, EmploiEleve, Situation, DifficulteRecherche
 from django.contrib import admin
 
 class EmploiModelAdmin(admin.ModelAdmin):
@@ -27,4 +27,5 @@ admin.site.register(EmployeurDomaineSpecifique)
 admin.site.register(Position)
 admin.site.register(Situation)
 admin.site.register(EmploiEleve, EmploiEleveModelAdmin)
+admin.site.register(DifficulteRecherche)
 
