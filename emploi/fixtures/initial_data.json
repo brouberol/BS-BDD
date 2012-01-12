@@ -460,6 +460,14 @@
         }
     }, 
     {
+        "pk": 2, 
+        "model": "emploi.emploi", 
+        "fields": {
+            "employeur": 2, 
+            "description": "Stagiaire"
+        }
+    }, 
+    {
         "pk": 1, 
         "model": "emploi.situation", 
         "fields": {
@@ -495,16 +503,68 @@
         }
     }, 
     {
+        "pk": 1, 
+        "model": "emploi.difficulterecherche", 
+        "fields": {
+            "nom": "Peu ou pas de difficult\u00e9s"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "emploi.difficulterecherche", 
+        "fields": {
+            "nom": "Absence de d\u00e9bouch\u00e9s"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "emploi.difficulterecherche", 
+        "fields": {
+            "nom": "Inad\u00e9quation avec projet professionel"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "emploi.difficulterecherche", 
+        "fields": {
+            "nom": "Pas d'offre dans le secteur g\u00e9ographqiue"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "emploi.difficulterecherche", 
+        "fields": {
+            "nom": "Salaire insuffisant"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "emploi.difficulterecherche", 
+        "fields": {
+            "nom": "Discrimination homme/femme"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "emploi.difficulterecherche", 
+        "fields": {
+            "nom": "Manque d'exp\u00e9riences"
+        }
+    }, 
+    {
         "pk": 2, 
         "model": "emploi.emploieleve", 
         "fields": {
             "emploi": 1, 
             "duree_recherche": 0, 
-            "salaire": 0, 
+            "difficulte_rech": null, 
+            "salaire": "0.0", 
+            "cadre": false, 
             "eleve": 1, 
             "position": 18, 
             "situation": 1, 
-            "annee": 2012
+            "annee": 2012, 
+            "adequation": ""
         }
     }
 ]
