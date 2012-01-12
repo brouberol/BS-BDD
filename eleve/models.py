@@ -9,11 +9,11 @@ from django.contrib.auth.models import User
 from etat_civil.models import EtatCivil
 from admission.models import Admission
 
-
 class Eleve(models.Model):
     """
     An 'Eleve' is an authenticated user that can post and update
-    data on the website.
+    data on the website. He/S he attended classes in BS and thus
+    has a scholar record
     """
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -38,4 +38,5 @@ class Eleve(models.Model):
 
     class Meta:
         verbose_name = u"Élève"
+
 
