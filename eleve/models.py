@@ -31,6 +31,8 @@ class Eleve(models.Model):
     #date_joined: auto
     etat_civil = models.OneToOneField(EtatCivil, on_delete=models.CASCADE)
     admission  = models.ForeignKey(Admission, on_delete=models.CASCADE)
+    photo      = models.ImageField(upload_to='static/eleves/avatar/', blank=True)
+    cv         = models.FileField(upload_to='static/eleves/cv/', blank=True, verbose_name=u"CV")
 
 
     def __unicode__(self):
