@@ -1,0 +1,37 @@
+[
+    {
+        "pk": 1, 
+        "model": "post_bs.formationpostbs", 
+        "fields": {
+            "nom": "Master 2"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "post_bs.formationpostbs", 
+        "fields": {
+            "nom": "Mast\u00e8re"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "post_bs.formationpostbs", 
+        "fields": {
+            "nom": "Th\u00e8se"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "post_bs.formationpostbs", 
+        "fields": {
+            "nom": "CAPES"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "post_bs.formationpostbs", 
+        "fields": {
+            "nom": "Agr\u00e9gation"
+        }
+    }
+]
