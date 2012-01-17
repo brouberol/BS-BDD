@@ -1,0 +1,12 @@
+<h2>Liste de stages</h2>
+
+<ul>
+  {% for stage in stage_list %}
+  <p>
+    <li>Employeur : {{ stage.employeur }}
+    {% if stage.sujet %}<li>Sujet : {{ stage.sujet }} {% endif %}
+    {% if stage.duree %}<li>Durée : {{ stage.duree }} mois {% endif %}
+    {% if stage.salaire %}<li>Salaire : {{ stage.salaire }}€ {% endif %}
+  </p>
+  {% endfor %}
+</ul>

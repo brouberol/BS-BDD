@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% block main %}
+
+<form enctype="multipart/form-data" method="post" action="">{% csrf_token %}
+  {% if form.file.errors %}<ul>{% for error in form.file.errors %}<li>{{error}}{% endfor %}</ul>{% endif %}
+  <p>{{ form.file }}</p>
+  <input type="submit" value="Envoyer" />
+</form>
+
+{% endblock %}
