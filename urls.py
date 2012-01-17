@@ -4,14 +4,18 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+# Admin urls
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'BS.views.home', name='home'),
-    # url(r'^BS/', include('BS.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+)
+
+# Default and common urls
+urlpatterns += patterns('',
+                        )
+
+# App-level urls
+urlpatterns += patterns('',
+    url(r'^stage/', include('stage.urls')),
+    url(r'^upload/', include('upload.urls')),
 )
