@@ -76,7 +76,7 @@ class EchangeEleve(models.Model):
 
 
 class ResultatEleve(models.Model):
-    """Association between a student's scholar year and his/her results"""
+    """Association between a student's scholar year and academic results"""
 
     # WARNING : no rank in 5th year
 
