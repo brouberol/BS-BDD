@@ -52,22 +52,19 @@ def save_excel(file):
             destination.write(chunk)
     return destination
 
-def save_etat_civil(row):
+def create_etat_civil(row):
     """Read an excel row and save the corresponding EtatCivil object in database"""
 
-    nationalite, created = Pays.objects.get_or_create(nom=row['nationalite'])
-    j,m,a = row['date_de_naissance'].split("/")
-    j,m,a = int(j), int(m), int(a)    
-    
+    errors = []
+
+    nationalite, created = Pays.objects.get_or_create(nom=unicode(row['nationalite']))            
     ec = EtatCivil()
     ec.nom_insa = row['nom_insa']
     ec.nom_actuel = row['nom_actuel']
-    ec.prenom = row['prenom']
+    ec.prenom =row['prenom']
     ec.num_etudiant = row['num_etudiant']
     ec.sexe = row['sexe']
-    ec.date_naissance = datetime(a,m,j) # LE PROBLEME VIENT DE LA, QUELQUE PART... BIUSOUS ET A DEMAIN
-    # ec.date_naissance = row['date_de_naissance'] # LE BUG VIENT DE DATEFIELD QUI PART EN COUILLE. A DEMAIN =)
-    # IDEA : change input format to string, or find a way to convert excel date --> datetime
+    ec.date_naissance = datetime(*[int(i) for i in row['date_de_naissance'].split("/")][::-1])
     ec.nationalite = nationalite # MUST BE A "PAYS" INSTANCE
     ec.adresse_1 = row['adresse_1_(personnelle)']
     ec.zip_adresse_1 = row['code_postal_1']
@@ -76,7 +73,16 @@ def save_etat_civil(row):
     ec.email_1 = row['email_1']
     ec.email_2 = row['email_2']
     
-    ec.save()
+    try:
+        ec.full_clean()
+    except ValidationError, e:
+        m = dict(e.message_dict)
+        errors.append([str("%s %s"%(ec.prenom, ec.nom_insa)), [list(k) for k in zip(m.keys(),m.values())]])
+        print errors
+
+    return ec, errors 
+            
+    
     
 def populate_database(file):
     """
@@ -88,34 +94,17 @@ def populate_database(file):
     rowmax = xl.get_corners(sheet)[-1]
  
     errors = []
-    upload = True
+    upload = True # If upload still True at the end, --> save
 
     for nrow in range (1, rowmax+1):
         row = xl.get_row(sheet, nrow)
         
-        # ETAT CIVIL
-        nationalite, created = Pays.objects.get_or_create(nom=unicode(row['nationalite']))            
-        ec = EtatCivil()
-        ec.nom_insa = row['nom_insa']
-        ec.nom_actuel = row['nom_actuel']
-        ec.prenom =row['prenom']
-        ec.num_etudiant = row['num_etudiant']
-        ec.sexe = row['sexe']
-        ec.date_naissance = datetime(*[int(i) for i in row['date_de_naissance'].split("/")][::-1])
-        ec.nationalite = nationalite # MUST BE A "PAYS" INSTANCE
-        ec.adresse_1 = row['adresse_1_(personnelle)']
-        ec.zip_adresse_1 = row['code_postal_1']
-        ec.adresse_2 = row['adresse_2_(parentale)']
-        ec.zip_adresse_2 = row['code_postal_2']
-        ec.email_1 = row['email_1']
-        ec.email_2 = row['email_2']
-        
-        try:
-            ec.full_clean()
-        except ValidationError, e:
-            errors.append(str("%s %s : %s "%(ec.prenom, ec.nom_insa, e.message_dict)))
-            upload = False
+        ec, errors = create_etat_civil(row)
             
+    if len(errors)==0:
+        upload = False
+    else:
+        upload = True
     return (upload, errors)
 
 

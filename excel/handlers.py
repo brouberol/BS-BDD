@@ -7,7 +7,6 @@ from pyExcelerator import *
 from os.path import abspath
 
 from excel.headers import main_header_type
-
 class BSExcelFileData:
 
 # NOTES FOR DEVELOPPEMENT

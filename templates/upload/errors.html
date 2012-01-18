@@ -1,6 +1,18 @@
 {% block errors %}
 {% if errors %}
-<p>L'importation des données a rencontré les erreurs suivantes :
-<ul>{% for error in errors %}<li> {{error}}{% endfor %}</ul></p>
+L'importation des données a rencontré les erreurs suivantes :
+<ul>
+  {% for error in errors %}
+  <li>{{error|slice:"1"|safeseq|join:", "}}
+  <ul>
+    {% for tmp in error|slice:"1:" %}
+    {% for message in tmp %}
+    <li>{{message|slice:"1"|safeseq|join:""}}: {% for e in message|slice:"1:"%}{{e|safeseq|join:""}}{% endfor %}
+    {% endfor%}
+      {% endfor %}
+  </ul>
+</ul>
+{% endfor %}
+
 {% endif %}
 {% endblock %}
