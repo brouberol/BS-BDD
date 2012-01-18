@@ -18,7 +18,7 @@ class DataInputForm(forms.Form):
         
         file = self.cleaned_data['file']
         extension = str(file).split('.')[-1]
-        if extension not in ['xls', 'xlsx']:
+        if extension not in ['xls',]:
             raise ValidationError("Ce fichier doit être au format Excel (.xls, .xlsx)")
         else:
             # Security check : refuse any non-excel file with acceptable extension

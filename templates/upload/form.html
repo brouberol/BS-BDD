@@ -1,0 +1,7 @@
+<p>Importez vos données dans un fichier Excel (.xls).</p>
+
+<form enctype="multipart/form-data" method="post" action="">{% csrf_token %}
+  {% if form.file.errors %}{% for error in form.file.errors %}<p>{{error|escape}}</p>{% endfor %}{% endif %}
+  <p>{{ form.file }}</p>
+  <input type="submit" value="Envoyer" />
+</form>

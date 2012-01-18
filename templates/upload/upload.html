@@ -3,10 +3,17 @@
 
 <h2>Upload de données au format Excel</h2>
 
-<form enctype="multipart/form-data" method="post" action="">{% csrf_token %}
-  <p>{{ form.file }}</p>
-  {% if form.file.errors %}{% for error in form.file.errors %}<p>{{error|escape}}</p>{% endfor %}{% endif %}
-  <input type="submit" value="Envoyer" />
+{% block success %}{% endblock %}
+
+{% block errors  %}{% include "upload/errors.html" %}{% endblock %}
+
+{% block form %}
+{% if form %}{% include "upload/form.html" %}
+{% else %}
+<form  method="post" action="/">{% csrf_token %}
+  <input type="submit" value="Accueil" />
 </form>
+{% endif %}
+{% endblock %} 
 
 {% endblock %}

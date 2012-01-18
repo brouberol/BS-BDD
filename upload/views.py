@@ -7,6 +7,7 @@ from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.http import Http404, HttpResponseRedirect
 from django.db import transaction
+from django.core.exceptions import ValidationError
 
 from os.path import exists
 from os import makedirs
@@ -28,18 +29,24 @@ def upload(request):
         form = DataInputForm(request.POST, request.FILES)
         if form.is_valid():
             # ALL THE  MAGIC HAPPENS HERE
-            populate_database(request.FILES['file'])
-            return HttpResponseRedirect('/success/url/')
+            upload, errors = populate_database(request.FILES['file'])
+            if len(errors)==0:
+                return HttpResponseRedirect('success/')
+            else:
+                return render_to_response('upload/upload.html', RequestContext(request,{'form': form, 'errors': errors}))
     else:
         form = DataInputForm()
-        return render_to_response('upload/upload.html', RequestContext(request,{'form': form}))
+    return render_to_response('upload/upload.html', RequestContext(request,{'form': form}))
 
 def save_excel(file):
     """Save the input excel file in the /static/upload/ directory"""
+    # EXCEL SAVE PATH
     filepath = MEDIA_ROOT+'/upload/'
     filename = 'tmp_xl_data.xls'
     if not exists(filepath):
-        makedirs(filepath)           
+        makedirs(filepath)   
+        
+    # SAVE EXCEL FILE
     with open(filepath+filename, 'wb+') as destination:
         for chunk in file.chunks():
             destination.write(chunk)
@@ -71,7 +78,6 @@ def save_etat_civil(row):
     
     ec.save()
     
-    
 def populate_database(file):
     """
     Save the input excel file in the /MEDIA_ROOT/upload/ directory,
@@ -79,13 +85,40 @@ def populate_database(file):
     """
     xl = BSExcelFileData(save_excel(file).name)
     sheet = 0
-    colmin, rowmin, colmax, rowmax = xl.get_corners(sheet)
-    
+    rowmax = xl.get_corners(sheet)[-1]
+ 
+    errors = []
+    upload = True
+
     for nrow in range (1, rowmax+1):
-        row = xl.select_row(sheet, nrow, colmax)
-        print row
-        save_etat_civil(row)
-    
+        row = xl.get_row(sheet, nrow)
+        
+        # ETAT CIVIL
+        nationalite, created = Pays.objects.get_or_create(nom=unicode(row['nationalite']))            
+        ec = EtatCivil()
+        ec.nom_insa = row['nom_insa']
+        ec.nom_actuel = row['nom_actuel']
+        ec.prenom =row['prenom']
+        ec.num_etudiant = row['num_etudiant']
+        ec.sexe = row['sexe']
+        ec.date_naissance = datetime(*[int(i) for i in row['date_de_naissance'].split("/")][::-1])
+        ec.nationalite = nationalite # MUST BE A "PAYS" INSTANCE
+        ec.adresse_1 = row['adresse_1_(personnelle)']
+        ec.zip_adresse_1 = row['code_postal_1']
+        ec.adresse_2 = row['adresse_2_(parentale)']
+        ec.zip_adresse_2 = row['code_postal_2']
+        ec.email_1 = row['email_1']
+        ec.email_2 = row['email_2']
+        
+        try:
+            ec.full_clean()
+        except ValidationError, e:
+            errors.append(str("%s %s : %s "%(ec.prenom, ec.nom_insa, e.message_dict)))
+            upload = False
+            
+    return (upload, errors)
+
+
     
     
     

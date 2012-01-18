@@ -1,0 +1,6 @@
+{% block errors %}
+{% if errors %}
+<p>L'importation des données a rencontré les erreurs suivantes :
+<ul>{% for error in errors %}<li> {{error}}{% endfor %}</ul></p>
+{% endif %}
+{% endblock %}
