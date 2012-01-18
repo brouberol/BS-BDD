@@ -105,7 +105,6 @@ class BSExcelFileData:
         """Select the data stored in a row given the sheet name and the row index"""
 
         colmin, rowmin, colmax, rowmax = self.get_corners(sheet) 
-        
         data = self.xls[sheet][1]
         if nrow > 0 :
             row = {}
