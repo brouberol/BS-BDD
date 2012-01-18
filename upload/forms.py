@@ -7,6 +7,8 @@ from django import forms
 from django.db.models import FileField
 from django.core.exceptions import ValidationError
 
+from pyExcelerator import *
+
 class DataInputForm(forms.Form):
     """Form allowing data input from an Excel file"""    
     file = forms.FileField()
@@ -19,4 +21,11 @@ class DataInputForm(forms.Form):
         if extension not in ['xls', 'xlsx']:
             raise ValidationError("Ce fichier doit être au format Excel (.xls, .xlsx)")
         else:
-            return file
+            # Security check : refuse any non-excel file with acceptable extension
+            try:
+                ImportXLS.parse_xls(file)
+                return file
+            except:
+                raise ValidationError(u"Ce fichier n'a pas pu être importé : assurez vous que ce soit bien un tableur Excel.")
+        
+            

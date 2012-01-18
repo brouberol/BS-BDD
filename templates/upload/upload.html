@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-{% load url from future %}
 {% block main %}
 
+<h2>Upload de données au format Excel</h2>
+
 <form enctype="multipart/form-data" method="post" action="">{% csrf_token %}
-  {% if form.file.errors %}<ul>{% for error in form.file.errors %}<li>{{error}}{% endfor %}</ul>{% endif %}
   <p>{{ form.file }}</p>
+  {% if form.file.errors %}{% for error in form.file.errors %}<p>{{error|escape}}</p>{% endfor %}{% endif %}
   <input type="submit" value="Envoyer" />
 </form>
 
