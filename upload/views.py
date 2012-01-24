@@ -26,8 +26,10 @@ from international.models import Pays, Universite
 from admission.models import Admission, FiliereAdmission, DomaineAdmission
 from annee.models import PromoBS, PromoBSEleve, ResultatEleve, EchangeEleve
 from eleve.models import Eleve
+from stage.models import Stage, StageEleve
+from emploi.models import Employeur
 
-@transaction.commit_on_success
+@transaction.commit_manually
 def upload(request):
     """Manage the uploading of new data and storing in the Database"""
     
@@ -37,8 +39,14 @@ def upload(request):
             # ALL THE  MAGIC HAPPENS HERE
             upload, errors = populate_database(request.FILES['file'])
             if len(errors)==0:
+                print "COMMIT"
+                transaction.commit()
                 return HttpResponseRedirect('success/')
-            else:
+            else :
+                print "ROLLBACK"
+                print e
+                transaction.rollback()
+                print "END"
                 return render_to_response('upload/upload.html', RequestContext(request,{'form': form, 'errors': errors}))
     else:
         form = DataInputForm()
@@ -145,9 +153,9 @@ def create_resultat_eleve(row, etat_civil, annee_eleve):
 
 def create_echange_eleve(row, etat_civil, annee_eleve):
     """Reads an excel row and create the corresponding academic exchange object, if need be"""
-    errors = []
-    ech = EchangeEleve()
     if row['pays_echange_%se_annee'%(annee_eleve.promo_bs.niveau)] != '': # If excel sheet contains info
+        errors = []
+        ech = EchangeEleve()
         ech.promo_eleve = annee_eleve
         pays = Pays.objects.get_or_create(nom = row['pays_echange_%se_annee'%(annee_eleve.promo_bs.niveau)])[0]
         ech.universite = Universite.objects.get_or_create(nom=row['universite_echange_%se_annee'%(annee_eleve.promo_bs.niveau)],
@@ -160,8 +168,31 @@ def create_echange_eleve(row, etat_civil, annee_eleve):
             errors.append([str("%s %s"%(etat_civil.prenom, etat_civil.nom_insa)), [list(k) for k in zip(m.keys(),m.values())]]) 
         return ech, errors
     else:
-        return None, None
+        return None, []
 
+
+def create_stage_eleve(row, etat_civil, annee_eleve):
+    """Reads an excel row and create the corresponding Stage and StageEleve objects if need be"""
+    if row['employeur_stage_%se_annee'%(annee_eleve.promo_bs.niveau)] != '': # If excel sheet contains info
+        errors = []
+        st_el = StageEleve()
+        st_el.promo_eleve = annee_eleve
+        emp = Employeur.objects.get_or_create(nom=row['employeur_stage_%se_annee'%(annee_eleve.promo_bs.niveau)])[0]
+        st_el.stage = Stage.objects.get_or_create(
+            employeur = emp,
+            sujet = row['sujet_stage_%se_annee'%(annee_eleve.promo_bs.niveau)],
+            duree = row['duree_stage_%se_annee'%(annee_eleve.promo_bs.niveau)],
+            salaire = str(row['salaire_stage_%se_annee'%(annee_eleve.promo_bs.niveau)])
+            )[0]
+        try:
+            st_el.full_clean()
+        except ValidationError, e:
+            m = dict(e.message_dict)
+            errors.append([str("%s %s"%(etat_civil.prenom, etat_civil.nom_insa)), [list(k) for k in zip(m.keys(),m.values())]]) 
+        return st_el, errors
+    else:
+        return None, []
+    
 def populate_database(file):
     """
     Save the input excel file in the /MEDIA_ROOT/upload/ directory,
@@ -202,22 +233,59 @@ def populate_database(file):
         # -- PROMO_BS
         third, e = create_promo_bs(row, ec, 3)
         if len(e) > 0:errors.append(e)
-        # -- PROMO_BS<->ELEVE
+        #  print third
+        # -- PROMO_BS <-> ELEVE
         eleve_third = PromoBSEleve(eleve=el, promo_bs=third)
-        # -- PROMO_BS<->ELEVE<->RESULTAT
+        # print eleve_third
+        # -- PROMO_BS <-> ELEVE <-> RESULTAT
         resultat_eleve_third, e = create_resultat_eleve(row, ec, eleve_third)
-        # -- PROMO_BS<->ELEVE<->ECHANGE
-        echange_eleve_third, e = create_echange_eleve(row, ec, eleve_third)
-        
-        
+        # print resultat_eleve_third
         #if len(e) > 0:errors.append(e)
-        # 4e ANNEE
-        #fourth, e = create_promo_bs(row, ec, 4)
+        # -- PROMO_BS <-> ELEVE <-> ECHANGE
+        echange_eleve_third, e = create_echange_eleve(row, ec, eleve_third)
+        # print echange_eleve_third
+        #if len(e) > 0:errors.append(e)
+        # -- PROMO_BS <-> ELEVE <-> STAGE
+        stage_eleve_third, e = create_stage_eleve(row, ec, eleve_third)
+        # print stage_eleve_third
         #if len(e) > 0:errors.append(e)
 
-        # 5e ANNEE
-        #fifth, e = create_promo_bs(row, ec, 5)
-        #if len(e) > 0:errors.append(e)
+        # - 4e ANNEE
+        if row['scolarite_4e_annee'] != '':
+            # -- PROMO_BS
+            fourth, e = create_promo_bs(row, ec, 4)
+            if len(e) > 0:errors.append(e)
+            # print fourth
+            # -- PROMO_BS <-> ELEVE
+            eleve_fourth = PromoBSEleve(eleve=el, promo_bs=fourth)
+            # print eleve_fourth
+            # -- PROMO_BS <-> ELEVE <-> RESULTAT
+            resultat_eleve_fourth, e = create_resultat_eleve(row, ec, eleve_fourth)
+            # print resultat_eleve_fourth
+            if len(e) > 0:errors.append(e)
+            # -- PROMO_BS <-> ELEVE <-> ECHANGE
+            echange_eleve_fourth, e = create_echange_eleve(row, ec, eleve_fourth)
+            # print echange_eleve_fourth
+            if len(e) > 0:errors.append(e)
+            # -- PROMO_BS <-> ELEVE <-> STAGE
+            stage_eleve_fourth, e = create_stage_eleve(row, ec, eleve_fourth)
+            # print stage_eleve_fourth
+            if len(e) > 0:errors.append(e)
+
+        # - 5e ANNEE
+        if row['scolarite_5e_annee'] != '':
+            # -- PROMO_BS
+            fifth, e = create_promo_bs(row, ec, 5)
+            if len(e) > 0:errors.append(e)
+            # print fifth
+            # -- PROMO_BS <-> ELEVE
+            eleve_fifth = PromoBSEleve(eleve=el, promo_bs=fifth)
+            # print eleve_fifth
+            # -- PROMO_BS <-> ELEVE <-> STAGE
+            stage_eleve_fifth, e = create_stage_eleve(row, ec, eleve_fifth)
+            # print 'STAGE'
+            #if len(e) > 0:errors.append(e)
+
         
     if len(errors)==0:
         upload = False
