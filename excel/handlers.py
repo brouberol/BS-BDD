@@ -46,8 +46,11 @@ class BSExcelFileData:
         """
 	if sheet>=self.nsheet:
 	    return
-	rowmax,colmax = max(self.data[sheet].keys()) ## lower right corner
 	rowmin,colmin = min(self.data[sheet].keys()) ## higher left corner
+        #rowmax,colmax = max(self.data[sheet].keys()) ## lower right corner
+        rowmax = max([coord[0] for coord in self.data[sheet].keys()])
+        colmax = max([coord[1] for coord in self.data[sheet].keys()])
+
 	return colmin, rowmin, colmax, rowmax
             
 
@@ -104,7 +107,7 @@ class BSExcelFileData:
     def get_row(self, sheet, nrow):
         """Select the data stored in a row given the sheet name and the row index"""
 
-        colmin, rowmin, colmax, rowmax = self.get_corners(sheet) 
+        colmin, rowmin, colmax, rowmax = self.get_corners(sheet)
         data = self.xls[sheet][1]
         if nrow > 0 :
             row = {}

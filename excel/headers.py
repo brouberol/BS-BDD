@@ -24,9 +24,35 @@ main_header_type = [
     1,      # code_postal_2
     u'email_1', 
     u'email_2',
-    u'origine_avant_BiM',
-    u'filiere_avant_BIM',
-    u'taille_de_promo_avant_BIM',	
-    u'classement_avant_BIM',
-    u'annee_recrutement'
+    u'origine_avant_BS',
+    u'filiere_avant_BS',
+    u'taille_de_promo_avant_BS',	
+    u'classement_avant_BS',
+    u'annee_recrutement',
+    1, # annee_admission
+    u'promo_BS',
+    u'scolarite_3e_annee',
+    1, # taille_promo_3e annee
+    1, # annee_3e_annee
+    1, # classement_3e_annee
+    u'pays_echange_3e_annee',
+    u'universite_echange_3e_annee',
+    1, #duree_echange_3e_annee
+    u'employeur_stage_3e_annee',
+    u'sujet_stage_3e_annee',
+    1, # duree_stage_3e_annee
+    1, # salaire_stage_3e_annee
+    u'scolarite_4e_annee',
+    1, # taille_promo_4e annee
+    1, # annee_4e_annee,
+    1, # classement_4_annee
+    u'universite_echange_4e_annee',
+    1, #duree_echange_4e_annee
+    u'employeur_stage_4e_annee',
+    u'sujet_stage_4e_annee',
+    1, # duree_stage_4e_annee
+    1, # salaire_stage_4e_annee
+    u'scolarite_5e_annee',	
+    1, # taille_promo_5e_annee	
+    1, # annee_5e_annee
     ]  
