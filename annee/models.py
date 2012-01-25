@@ -68,7 +68,7 @@ class EchangeEleve(models.Model):
     duree       = models.PositiveSmallIntegerField(verbose_name=u"Durée de l'échange", help_text=u"En mois. Donnez un nombre rond.", blank=True, null=True)
 
     def __unicode__(self):
-        return '%s - %s - %s - %d mois' %(self.promo_eleve, self.universite.pays, self.universite.nom, self.duree)
+        return '%s - %s - %s - %s mois' %(self.promo_eleve, self.universite.pays, self.universite.nom, self.duree)
 
     class Meta:
         verbose_name =u"Élève parti en échange académique"

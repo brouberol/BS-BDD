@@ -1,5 +1,0 @@
-Feuille1
-
-{(1, 3): 2710657, (0, 7): u'Code postal 1', (2, 6): u'20 impasse du genou', (1, 6): u'20 cours Tolsto\xef', (0, 10): u'Email 1', (0, 3): u'num_etudiant', (1, 11): u'rouberol.b@gmail.com', (2, 5): 33155, (1, 2): u'Balthazar, Louis, Barth\xe9lemy', (2, 0): u'Longevial', (1, 5): 33181, (0, 11): u'Email 2', (0, 4): u'sexe', (1, 10): u'balthazar.rouberol@insa-lyon.fr', (2, 7): 67890, (0, 0): u'nom_insa', (2, 2): u'Julie', (1, 4): u'F', (2, 10): u'julie.longevial@insa-lyon.fr', (0, 5): u'date de naissance', (1, 9): 71100, (1, 0): u'Rouberol', (0, 8): u'Adresse 2 (parentale)', (0, 1): u'nom_actuel', (2, 11): u'julie.longevial@gmail.com', (2, 4): u'M', (0, 6): u'Adresse 1 (personnelle)', (1, 8): u"2 impasse de l'ancienne poste", (1, 7): 69100, (0, 9): u'Code postal 2', (2, 3): 2720678, (0, 2): u'prenom(s)'}
-Skiping empty sheet Feuille2
-Skiping empty sheet Feuille3
