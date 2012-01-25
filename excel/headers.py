@@ -28,8 +28,8 @@ main_header_type = [
     u'filiere_avant_BS',
     u'taille_de_promo_avant_BS',	
     u'classement_avant_BS',
-    u'annee_recrutement',
     1, # annee_admission
+    u'filiere_BS',
     u'promo_BS',
     u'scolarite_3e_annee',
     1, # taille_promo_3e annee
@@ -45,8 +45,9 @@ main_header_type = [
     u'scolarite_4e_annee',
     1, # taille_promo_4e annee
     1, # annee_4e_annee,
-    1, # classement_4_annee
+    1, # classement_4e_annee
     u'universite_echange_4e_annee',
+    u'pays_echange_4e_annee',
     1, #duree_echange_4e_annee
     u'employeur_stage_4e_annee',
     u'sujet_stage_4e_annee',
@@ -55,4 +56,8 @@ main_header_type = [
     u'scolarite_5e_annee',	
     1, # taille_promo_5e_annee	
     1, # annee_5e_annee
+    u'employeur_stage_5e_annee',
+    u'sujet_stage_5e_annee',
+    1, # duree_stage_5e_annee
+    1, # salaire_stage_5e_annee
     ]  

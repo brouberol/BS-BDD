@@ -29,24 +29,18 @@ from eleve.models import Eleve
 from stage.models import Stage, StageEleve
 from emploi.models import Employeur
 
-@transaction.commit_manually
-def upload(request):
+
+def validate(request):
     """Manage the uploading of new data and storing in the Database"""
     
     if request.method == 'POST':
         form = DataInputForm(request.POST, request.FILES)
         if form.is_valid():
             # ALL THE  MAGIC HAPPENS HERE
-            upload, errors = populate_database(request.FILES['file'])
+            upload, errors = validate_data(request.FILES['file'])
             if len(errors)==0:
-                print "COMMIT"
-                transaction.commit()
                 return HttpResponseRedirect('success/')
             else :
-                print "ROLLBACK"
-                print e
-                transaction.rollback()
-                print "END"
                 return render_to_response('upload/upload.html', RequestContext(request,{'form': form, 'errors': errors}))
     else:
         form = DataInputForm()
@@ -76,7 +70,10 @@ def create_etat_civil(row):
     ec.num_etudiant = row['num_etudiant']
     ec.sexe = row['sexe'].upper()
     ec.date_naissance = datetime(*[int(i) for i in row['date_de_naissance'].split("/")][::-1])
-    ec.nationalite = Pays.objects.get_or_create(nom=unicode(row['nationalite']))[0]
+    try:
+        ec.nationalite = Pays.objects.get(nom=unicode(row['nationalite']))
+    except Pays.DoesNotExist:
+        ec.nationalite = Pays(nom=unicode(row['nationalite']))
     ec.adresse_1 = row['adresse_1_(personnelle)']
     ec.zip_adresse_1 = row['code_postal_1']
     ec.adresse_2 = row['adresse_2_(parentale)']
@@ -108,8 +105,14 @@ def create_admission(row, etat_civil):
     """Read an excel row and save the corresponding Admission object in database"""
     errors = []
     ad = Admission()
-    ad.filiere_org = FiliereAdmission.objects.get_or_create(nom=row['origine_avant_BS'])[0]
-    ad.domaine_org = DomaineAdmission.objects.get_or_create(nom=row['filiere_avant_BS'])[0]
+    try :
+        ad.filiere_org = FiliereAdmission.objects.get(nom=row['origine_avant_BS'])
+    except FiliereAdmission.DoesNotExist:
+        ad.filiere_org = FiliereAdmission(nom=row['origine_avant_BS'])
+    try:
+        ad.domaine_org = DomaineAdmission.objects.get(nom=row['filiere_avant_BS'])
+    except DomaineAdmission.DoesNotExist:
+        ad.domaine_org = DomaineAdmission(nom=row['filiere_avant_BS'])
     ad.annee_admission = row['annee_admission']
     ad.rang_pre_BS = row['classement_avant_BS']
     ad.taille_promo_pre_BS = row['taille_de_promo_avant_BS']
@@ -124,13 +127,22 @@ def create_promo_bs(row, etat_civil, year):
     """Read an excel row and save the corresponding PromoBS object in database
     corresponding to the 3rd year"""
     errors = []
-    pbs, created = PromoBS.objects.get_or_create(
-        niveau = year,
-        filiere = row['filiere_BS'],
-        categorie = row['scolarite_%de_annee'%(year)],
-        num_promo = row['promo_BS'],
-        taille_promo = row['taille_promo_%de_annee'%(year)],
-        annee = row['annee_%de_annee'%(year)])
+    try:
+        pbs = PromoBS.objects.get(
+            niveau = year,
+            filiere = row['filiere_BS'],
+            categorie = row['scolarite_%de_annee'%(year)],
+            num_promo = row['promo_BS'],
+            taille_promo = row['taille_promo_%de_annee'%(year)],
+            annee = row['annee_%de_annee'%(year)])
+    except PromoBS.DoesNotExist:
+        pbs = PromoBS(
+            niveau = year,
+            filiere = row['filiere_BS'],
+            categorie = row['scolarite_%de_annee'%(year)],
+            num_promo = row['promo_BS'],
+            taille_promo = row['taille_promo_%de_annee'%(year)],
+            annee = row['annee_%de_annee'%(year)])
     try:
         pbs.full_clean()
     except ValidationError, e:
@@ -157,9 +169,17 @@ def create_echange_eleve(row, etat_civil, annee_eleve):
         errors = []
         ech = EchangeEleve()
         ech.promo_eleve = annee_eleve
-        pays = Pays.objects.get_or_create(nom = row['pays_echange_%se_annee'%(annee_eleve.promo_bs.niveau)])[0]
-        ech.universite = Universite.objects.get_or_create(nom=row['universite_echange_%se_annee'%(annee_eleve.promo_bs.niveau)],
-                                                          pays = pays)[0]
+        try:
+            pays = Pays.objects.get(nom = row['pays_echange_%se_annee'%(annee_eleve.promo_bs.niveau)])
+        except Pays.DoesNotExist:
+            pays = Pays(nom = row['pays_echange_%se_annee'%(annee_eleve.promo_bs.niveau)])
+            
+        try:  
+            ech.universite = Universite.objects.get(nom=row['universite_echange_%se_annee'%(annee_eleve.promo_bs.niveau)],
+                                                    pays = pays)
+        except Universite.DoesNotExist:
+            ech.universite = Universite(nom=row['universite_echange_%se_annee'%(annee_eleve.promo_bs.niveau)],
+                                        pays = pays)
         ech.duree = row['duree_echange_%se_annee'%(annee_eleve.promo_bs.niveau)]
         try:
             ech.full_clean()
@@ -177,13 +197,22 @@ def create_stage_eleve(row, etat_civil, annee_eleve):
         errors = []
         st_el = StageEleve()
         st_el.promo_eleve = annee_eleve
-        emp = Employeur.objects.get_or_create(nom=row['employeur_stage_%se_annee'%(annee_eleve.promo_bs.niveau)])[0]
-        st_el.stage = Stage.objects.get_or_create(
-            employeur = emp,
-            sujet = row['sujet_stage_%se_annee'%(annee_eleve.promo_bs.niveau)],
-            duree = row['duree_stage_%se_annee'%(annee_eleve.promo_bs.niveau)],
-            salaire = str(row['salaire_stage_%se_annee'%(annee_eleve.promo_bs.niveau)])
-            )[0]
+        try:
+            emp = Employeur.objects.get(nom=row['employeur_stage_%se_annee'%(annee_eleve.promo_bs.niveau)])
+        except Employeur.DoesNotExist:
+            emp = Employeur(nom=row['employeur_stage_%se_annee'%(annee_eleve.promo_bs.niveau)])
+        try:
+            st_el.stage = Stage.objects.get(
+                employeur = emp,
+                sujet = row['sujet_stage_%se_annee'%(annee_eleve.promo_bs.niveau)],
+                duree = row['duree_stage_%se_annee'%(annee_eleve.promo_bs.niveau)],
+                salaire = str(row['salaire_stage_%se_annee'%(annee_eleve.promo_bs.niveau)]))               
+        except Stage.DoesNotExist:
+            st_el.stage = Stage(
+                employeur = emp,
+                sujet = row['sujet_stage_%se_annee'%(annee_eleve.promo_bs.niveau)],
+                duree = row['duree_stage_%se_annee'%(annee_eleve.promo_bs.niveau)],
+                salaire = str(row['salaire_stage_%se_annee'%(annee_eleve.promo_bs.niveau)]))
         try:
             st_el.full_clean()
         except ValidationError, e:
@@ -193,7 +222,7 @@ def create_stage_eleve(row, etat_civil, annee_eleve):
     else:
         return None, []
     
-def populate_database(file):
+def validate_data(file):
     """
     Save the input excel file in the /MEDIA_ROOT/upload/ directory,
     instanciate database-compliant objects and populate database
@@ -206,12 +235,10 @@ def populate_database(file):
     xl = BSExcelFileData(save_excel(file).name)
     sheet = 0
     rowmax = xl.get_corners(sheet)[-1]
- 
     errors = []
     upload = True # If upload still True at the end, --> save
 
     for nrow in range (1, rowmax+1): 
-
         row = xl.get_row(sheet, nrow)
 
         # - ETAT CIVIL
@@ -239,37 +266,37 @@ def populate_database(file):
         # print eleve_third
         # -- PROMO_BS <-> ELEVE <-> RESULTAT
         resultat_eleve_third, e = create_resultat_eleve(row, ec, eleve_third)
-        # print resultat_eleve_third
-        #if len(e) > 0:errors.append(e)
+        print resultat_eleve_third
+        if len(e) > 0:errors.append(e)
         # -- PROMO_BS <-> ELEVE <-> ECHANGE
         echange_eleve_third, e = create_echange_eleve(row, ec, eleve_third)
-        # print echange_eleve_third
-        #if len(e) > 0:errors.append(e)
+        print echange_eleve_third
+        if len(e) > 0:errors.append(e)
         # -- PROMO_BS <-> ELEVE <-> STAGE
         stage_eleve_third, e = create_stage_eleve(row, ec, eleve_third)
-        # print stage_eleve_third
-        #if len(e) > 0:errors.append(e)
+        print stage_eleve_third
+        if len(e) > 0:errors.append(e)
 
         # - 4e ANNEE
         if row['scolarite_4e_annee'] != '':
             # -- PROMO_BS
             fourth, e = create_promo_bs(row, ec, 4)
             if len(e) > 0:errors.append(e)
-            # print fourth
+            print fourth
             # -- PROMO_BS <-> ELEVE
             eleve_fourth = PromoBSEleve(eleve=el, promo_bs=fourth)
-            # print eleve_fourth
+            print eleve_fourth
             # -- PROMO_BS <-> ELEVE <-> RESULTAT
             resultat_eleve_fourth, e = create_resultat_eleve(row, ec, eleve_fourth)
-            # print resultat_eleve_fourth
+            print resultat_eleve_fourth
             if len(e) > 0:errors.append(e)
             # -- PROMO_BS <-> ELEVE <-> ECHANGE
             echange_eleve_fourth, e = create_echange_eleve(row, ec, eleve_fourth)
-            # print echange_eleve_fourth
+            print echange_eleve_fourth
             if len(e) > 0:errors.append(e)
             # -- PROMO_BS <-> ELEVE <-> STAGE
             stage_eleve_fourth, e = create_stage_eleve(row, ec, eleve_fourth)
-            # print stage_eleve_fourth
+            print stage_eleve_fourth
             if len(e) > 0:errors.append(e)
 
         # - 5e ANNEE
@@ -277,14 +304,13 @@ def populate_database(file):
             # -- PROMO_BS
             fifth, e = create_promo_bs(row, ec, 5)
             if len(e) > 0:errors.append(e)
-            # print fifth
+            print fifth
             # -- PROMO_BS <-> ELEVE
             eleve_fifth = PromoBSEleve(eleve=el, promo_bs=fifth)
-            # print eleve_fifth
+            print eleve_fifth
             # -- PROMO_BS <-> ELEVE <-> STAGE
             stage_eleve_fifth, e = create_stage_eleve(row, ec, eleve_fifth)
-            # print 'STAGE'
-            #if len(e) > 0:errors.append(e)
+            if len(e) > 0:errors.append(e)
 
         
     if len(errors)==0:

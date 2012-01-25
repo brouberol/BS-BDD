@@ -1,18 +1,10 @@
 {% block errors %}
 {% if errors %}
-L'importation des données a rencontré les erreurs suivantes :
+L'importation des données a rencontré les erreurs suivantes
 <ul>
-  {% for error in errors %}
-  <li>{{error|slice:"1"|safeseq|join:", "}}
-  <ul>
-    {% for tmp in error|slice:"1:" %}
-    {% for message in tmp %}
-    <li>{{message|slice:"1"|safeseq|join:""}}: {% for e in message|slice:"1:"%}{{e|safeseq|join:""}}{% endfor %}
-    {% endfor%}
-      {% endfor %}
-  </ul>
+  {% for message in errors %}
+  <li>{{message}}
+  {% endfor %}  
 </ul>
-{% endfor %}
-
 {% endif %}
 {% endblock %}
